@@ -1,0 +1,50 @@
+Compute the Feigenbaum delta from the logistic map.  The logistic map is given by
+,
+and the Feigenbaum delta is defined as
+ where 
+and where  is the value of  for which  is in the orbit of the period- cycle with .
+Here is a resonable outline:
+Loop 1 Start at period- with ,  and increment  with each iteration
+    Compute initial guess for  using ,  and .    
+    Loop 2 Iterate Newton's method, either a fixed number of times or until convergence
+        Initialize logistic map
+        Loop 3 Iterate the logistic map  times
+            Compute  and 
+         Loop 3 (end)
+        One step of  Newton's method
+    Loop 2 (end)
+    Save  and compute 
+ Loop 1 (end)
+Grading will be done on the converged values of  up to . Set .
+--------
+% Compute the Feigenbaum delta
+% Store approximate values in the row vector delta for assessment, where length(delta)= num_doublings and 
+% delta(2:num_doublings) are computed from the algorithm described in Lectures 21-23.
+num_doublings=11; delta=zeros(1,num_doublings); delta(1)=5;
+% Write your code here
+
+m = zeros(1,num_doublings);
+m(1)= 2; 
+m(2)= 1 + sqrt(5); 
+x  = 1/2; 
+y = 0; 
+for n = 2: num_doublings
+  z = 2^n ;
+  m(n+1) = m(n) + ( m(n) - m(n-1))/delta(n-1);
+  for j = 1:10
+    for k = 1:z
+      y = x*(1-x) + m(n+1)*y*(1-2*x);
+      x = m(n+1)*x*(1-x);
+    end
+    u(j) = (x -1/2 )/y;
+    m(n+1) = m(n+1)- u(j);
+  end
+  delta(n) = (m(n) - m(n-1))/(m(n+1) - m(n));
+end
+
+
+% Output your results
+fprintf('n        delta(n)\n');
+for n=1:num_doublings
+    fprintf('%2g %18.15f\n',n,delta(n));
+end
