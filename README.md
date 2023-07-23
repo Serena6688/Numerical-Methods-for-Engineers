@@ -1,5 +1,3 @@
-# Numerical-Methods-for-Engineers
-Here are some of my works for "Numerical-Methods-for-Engineers" at Coursera
 # **Numerical-Methods-for-Engineers**
 Coursera Numerical Methods for Engineers is offered by The Hong Kong University of Science and Technology.
 ## **Overview**
